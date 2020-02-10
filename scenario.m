@@ -29,5 +29,5 @@ elseif k_min>k
     disp('Cannot reach the target')
 end
 
-%yarkingey
+
     
