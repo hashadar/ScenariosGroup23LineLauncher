@@ -4,7 +4,7 @@ close all
 %for all values of d
 %independent:x 
 %dependant:V
-d=linspace(2,6);
+d=(2:0.01:6);
 alpha=(pi/4);
 V=sqrt((-4.905*d.^2)./(((-0.105-(d*tan(alpha)))*(cos(alpha))^2)));
 Ep=0.5*.025*(V.^2);
@@ -25,6 +25,12 @@ if k_min<k
     xlabel('Compression Distance (m)')
     ylabel('Potential Energy in the spring (J)')
     title('Energy vs Compression')
+    
+    figure
+    plot(d,x)
+    xlabel('Distance (m)')
+    ylabel('Compression (m))')
+    title('Compression vs Distance')
 elseif k_min>k 
     disp('Cannot reach the target')
 end
