@@ -4,13 +4,14 @@ close all
 %for all values of d
 %independent:x 
 %dependant:V
-h=
+h=0.405;
 Cd=0.47;
 A=pi*0.02^2;
 rho=1.225;
 d=(2:0.01:6);
 alpha=(pi/4);
-V=sqrt((-4.905*d.^2)./(((-(0.105+h)-(d*tan(alpha)))*(cos(alpha))^2)));
+V=sqrt((-4.905*d.^2)./(((-h)-(d*tan(alpha)))*(cos(alpha))^2));
+y=0.405+V*sin(alpha)*(d/(V*cos(alpha)))-4.905*(d/(V*cos(alpha)).^2);
 Fd=Cd*A*rho*V.^2;  
 Ep=0.5*.025*(V.^2);
 plot(d,Ep)
