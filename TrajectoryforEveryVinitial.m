@@ -9,15 +9,15 @@ h=-0.405;
 Vt=sqrt((2*m*g)/(Cd*rho*A));
 t=linspace(0,1.2);
 
-%Magnitude of Velocity
+%Magnitude of Initial Velocity
 Vmax=7.65;
 Vmin=4.08;
 
-%Velocity in one direction
+%Initial Velocity in one direction
 Vmaxx=Vmax/sqrt(2);
 Vminx=Vmin/sqrt(2);
 
-%Velocity vector in one direction
+%Initial Velocity vector in one direction
 P=linspace(Vminx,Vmaxx);
 
 %Matrixes
@@ -50,4 +50,5 @@ xlabel('Distance in X direction (m)')
 ylabel('Distance in Y direction (m)')
 title('Trajectory for Each Initial Velocity')
 end
+
 
