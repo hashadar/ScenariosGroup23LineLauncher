@@ -23,5 +23,5 @@ for i=1:100
 end
     plot(x,y_d)
     
-    Vmax=7.886
-    Vmin=4.46987
+    Vmax=7.65
+    Vmin=4.08
