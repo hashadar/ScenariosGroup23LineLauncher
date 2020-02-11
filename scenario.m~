@@ -10,8 +10,8 @@ A=pi*0.02^2;
 rho=1.225;
 d=(2:0.01:6);
 alpha=(pi/4);
-V=sqrt((-4.905*d.^2)./(((-(0.105+h)-(d*tan(alpha)))*(cos(alpha))^2)));
-Fd=Cd*A*rho*V.^2;  
+V=sqrt((-4.905*d.^2)./(((-0.105-(d*tan(alpha)))*(cos(alpha))^2)));
+Fd=Cd*A*rho*V.^2; 
 Ep=0.5*.025*(V.^2);
 plot(d,Ep)
 xlabel('Distance (m)')
