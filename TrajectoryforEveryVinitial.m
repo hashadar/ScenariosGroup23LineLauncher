@@ -1,17 +1,26 @@
+%Constants
 g=9.81;
 r=0.02;
 A=pi*r^2;
 Cd=0.47;
 rho=1.225;
 m=0.025;
+h=-0.405;
+Vt=sqrt((2*m*g)/(Cd*rho*A));
+t=linspace(0,1.2);
+
+%Magnitude of Velocity
 Vmax=7.65;
 Vmin=4.08;
+
+%Velocity in one direction
 Vmaxx=Vmax/sqrt(2);
 Vminx=Vmin/sqrt(2);
+
+%Velocity vector in one direction
 P=linspace(Vminx,Vmaxx);
-Vt=sqrt((2*m*g)/(Cd*rho*A));
-h=-0.405;
-t=linspace(0,1.2);
+
+%Matrixes
 Vn=zeros(100,100);
 x=linspace(0,0);
 y=linspace(0,0);
