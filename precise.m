@@ -11,27 +11,27 @@ rho=1.225;
 m=0.025;
 h=-0.405;
 Vt=sqrt((2*m*g)/(Cd*rho*A));
-t=linspace(0,1.2);
+t=linspace(0,1.5,1000);
 
 %Magnitude of Initial Velocity
-Vmax=7.65;
+Vmax=7.67;
 Vmin=4.08;
-Vv=linspace(Vmin,Vmax);
+Vv=linspace(Vmin,Vmax,1000);
 %Initial Velocity in one direction
 Vmaxx=Vmax/sqrt(2);
 Vminx=Vmin/sqrt(2);
 
 %Initial Velocity vector in one direction
-P=linspace(Vminx,Vmaxx);
+P=linspace(Vminx,Vmaxx,1000);
 
 %Matrixes
-Vn=zeros(100,100);
-x=linspace(0,0);
-y=linspace(0,0);
-V=linspace(0,0);
-y_d=linspace(0,0);
+Vn=zeros(1000,1000);
+x=linspace(0,0,1000);
+y=linspace(0,0,1000);
+V=linspace(0,0,1000);
+y_d=linspace(0,0,1000);
 
-for n=1:100
+for n=1:1000
 V_0=P(n);
 U_0=V_0;
 V=Vt.*((V_0-Vt*tan(g*t/Vt))./(Vt+V_0.*tan(g.*t./Vt)));
@@ -41,7 +41,7 @@ Vn(n,:)=V;
 X(n,:)=x;
 Y(n,:)=y;
 
-for i=1:100
+for i=1:1000
    if y(i)>h
     y_d(i)=y(i);
    else 
@@ -57,10 +57,10 @@ end
 
 %How to Find Vinital necessary for given value of d
 
-F=zeros(100);
+F=zeros(1000);
 
-for i=1:100 
-    for n=1:100
+for i=1:1000 
+    for n=1:1000
 if Y(i,n)>h
     F(i,n)=X(i,n);
 else F(i,n)=0;
@@ -87,8 +87,8 @@ disp(k_min_mm)
 k=150;
 Given_distance=input('What is the given distance');
 
-L=linspace(0,0);
-for i=1:100 
+L=linspace(0,0,1000);
+for i=1:1000 
 if d(i)>Given_distance
     L(i)=d(i);
 else L(i)=NaN;
@@ -98,5 +98,5 @@ Lmin=min(L);
 i=find(L==Lmin);
 c=Vv(i).*sqrt(0.025/k);
 
-disp('The minimum compressed distance in metres is')
+disp('The minimum compressed distance in centimetres is')
 disp(c*100)
