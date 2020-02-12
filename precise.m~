@@ -12,6 +12,9 @@ m=0.025;
 h=-0.405;
 Vt=sqrt((2*m*g)/(Cd*rho*A));
 t=linspace(0,1.5,1000);
+m_sp=
+
+m_p=0.070;
 
 %Magnitude of Initial Velocity
 Vmax=7.67;
@@ -77,7 +80,7 @@ d=max(F'); %#ok<UDIM>
 
 C_eff=1; %Efficiency of the energy conservation
 
-Ep=(0.5*.025*(Vv.^2))/C_eff;
+Ep=(0.5*m*(Vv.^2))/C_eff;
 figure 
 plot(d,Ep)
 xlabel('Distance in X direction (m)')
@@ -87,7 +90,7 @@ title('Energy vs Distance')
 %The minimum k of the Spring needed
 cmax=input('What is the maximum compression distance you want in metres');
 
-k_min=(0.025*((Vmax^2)/(cmax^2)))/C_eff;
+k_min=(m*((Vmax^2)/(cmax^2)))/C_eff;
 k_min_mm=k_min/1000;
 disp('The minimum k in N/mm is')
 disp(k_min_mm)
@@ -110,11 +113,11 @@ end
 end
 Lmin=min(L);
 i=find(L==Lmin);
-c=Vv(i).*sqrt(0.025/(k*C_eff));
+c=Vv(i).*sqrt(m/(k*C_eff));
 
 disp('The minimum compressed distance in centimetres is')
 disp(c*100)
 
 else
-    disp('The Spring Constant should be higher, this value cannot provide enough energy for the selected maximum compression value')
+    disp('The Spring Constant should be higher, this value cannot provide enough energy for the maximum compression value entered')
 end

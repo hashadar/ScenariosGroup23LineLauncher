@@ -5,6 +5,7 @@ close all
 %Constants
 g=9.81;
 r=0.02;
+O=(pi/4);
 A=pi*r^2;
 Cd=0.47;
 rho=1.225;
@@ -90,7 +91,7 @@ title('Energy vs Distance')
 %The minimum k of the Spring needed
 cmax=input('What is the maximum compression distance you want in metres');
 
-k_min=(m*((Vmax^2)/(cmax^2)))/C_eff;
+k_min=((((m+m_fsp+m_p)*(Vmax^2)+g*cmax*0.5*sin(O)*(m_p+m_fsp+2*m))/(cmax^2)))/C_eff;
 k_min_mm=k_min/1000;
 disp('The minimum k in N/mm is')
 disp(k_min_mm)
@@ -113,7 +114,14 @@ end
 end
 Lmin=min(L);
 i=find(L==Lmin);
-c=Vv(i).*sqrt(m/(k*C_eff));
+
+c=zeros(2,1);
+a=-k/2;
+b=g*0.50*sin(O)*(m_fsp+m_p+2*m);
+f=(m_fsp+m_p+m)*0.5*(Vv(i))^2;
+e=sqrt((b^2)-4*a*f);
+c(1)=(-b+e)/(2*a);
+c(2)=(-b-e)/(2*a);
 
 disp('The minimum compressed distance in centimetres is')
 disp(c*100)
