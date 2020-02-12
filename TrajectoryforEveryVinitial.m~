@@ -98,5 +98,5 @@ Lmin=min(L);
 i=find(L==Lmin);
 c=Vv(i).*sqrt(0.025/k);
 
-disp('The minimum compressed distance in centimetres is')
+disp('The minimum compressed distance in metres is')
 disp(c*100)
