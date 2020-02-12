@@ -30,6 +30,8 @@ x=linspace(0,0,1000);
 y=linspace(0,0,1000);
 V=linspace(0,0,1000);
 y_d=linspace(0,0,1000);
+X=zeros(1000,1000);
+Y=zeros(1000,1000);
 
 for n=1:1000
 V_0=P(n);
@@ -63,12 +65,13 @@ for i=1:1000
     for n=1:1000
 if Y(i,n)>h
     F(i,n)=X(i,n);
-else F(i,n)=0;
+else
+    F(i,n)=0;
 end 
     end
 end
 %Distance between the target and the apparatus
-d=max(F');
+d=max(F'); %#ok<UDIM>
 
 %Energy needed
 Ep=0.5*.025*(Vv.^2);
