@@ -90,7 +90,6 @@ disp(k_min)
 
 %How much the Spring should be compressed for a given d
 k=input('What is the k you want in N/m');
-
 if k_min<k 
 Given_distance=input('What is the given distance');
 
@@ -98,8 +97,7 @@ L=linspace(0,0,1000);
 for i=1:1000 
 if d(i)>Given_distance
     L(i)=d(i);
-else
-    L(i)=NaN;
+else L(i)=NaN;
 end 
 end
 Lmin=min(L);
@@ -109,7 +107,4 @@ c=Vv(i).*sqrt(0.025/k);
 disp('The minimum compressed distance in centimetres is')
 disp(c*100)
 
-else
-    disp('The Spring Constant should be higher, this value cannot provide enough energy for a maximum compression of ')
-    disp(cmax)
-end
+else disp(
