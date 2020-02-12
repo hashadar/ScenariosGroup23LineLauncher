@@ -5,7 +5,6 @@ close all
 %Constants
 g=9.81;
 r=0.02;
-O=(pi/4);
 A=pi*r^2;
 Cd=0.47;
 rho=1.225;
@@ -21,25 +20,23 @@ M=m_p+m_fsp+m;
 Vmax=7.67;
 Vmin=4.08;
 Vv=linspace(Vmin,Vmax,1000);
-%Initial Velocity in one direction
-Vmaxx=Vmax/sqrt(2);
-Vminx=Vmin/sqrt(2);
 
-%Initial Velocity vector in one direction
-P=linspace(Vminx,Vmaxx,1000);
+%Angle
 
+Q=35*(pi/180):1*(pi/180):55*(pi/180);
+O=
 %Matrixes
-Vn=zeros(1000,1000);
-x=linspace(0,0,1000);
-y=linspace(0,0,1000);
-V=linspace(0,0,1000);
-y_d=linspace(0,0,1000);
-X=zeros(1000,1000);
-Y=zeros(1000,1000);
+Vn=zeros(1000,1000,21);
+x=zeros(1,1000,21);
+y=zeros(1,1000,21);
+V=zeros(1,1000,21);
+y_d=zeros(1,1000,21);
+X=zeros(1000,1000,21);
+Y=zeros(1000,1000,21);
 
 for n=1:1000
-V_0=P(n);
-U_0=V_0;
+V_0=Vv(n)*sin(O);
+U_0=Vv(n)*cos(O);
 V=Vt.*((V_0-Vt*tan(g*t/Vt))./(Vt+V_0.*tan(g.*t./Vt)));
 x=(Vt^2/g).*log((Vt^2+g*U_0.*t)./Vt^2);
 y=(Vt^2/(2*g))*log((V_0.^2+Vt^2)./(V.^2+Vt^2));
