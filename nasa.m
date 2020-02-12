@@ -1,3 +1,5 @@
+%Yarkin Saltik
+
 g=9.81;
 r=0.02;
 A=pi*r^2;
