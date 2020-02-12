@@ -74,6 +74,9 @@ d=max(F');
 Ep=0.5*.025*(Vv.^2);
 figure 
 plot(d,Ep)
+xlabel('Distance in X direction (m)')
+ylabel('Energy Required to be Stored in the Spring (J)')
+title('Energy vs Distance')
 
 %The minimum k of the Spring needed
 cmax=0.1;
