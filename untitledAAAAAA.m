@@ -17,14 +17,20 @@ m_fsp=(4/pi^2)*0.1377;
 m_p=0.070;
 M=m_p+m_fsp+m;
 %Magnitude of Initial Velocity
-Vmax=7.67;
-Vmin=4.08;
+Vmax=8;
+Vmin=4;
 Vv=linspace(Vmin,Vmax,1000);
-
+for i=1:21
+    Vv(:,:,i)=Vv(:,:,1);
+end
 %Angle
-
+O=zeros(1,1000,21);
 Q=35*(pi/180):1*(pi/180):55*(pi/180);
-O=
+
+for i=1:1000
+    O(1,i,:)=Q;
+end
+   
 %Matrixes
 Vn=zeros(1000,1000,21);
 x=zeros(1,1000,21);
@@ -33,93 +39,78 @@ V=zeros(1,1000,21);
 y_d=zeros(1,1000,21);
 X=zeros(1000,1000,21);
 Y=zeros(1000,1000,21);
-
+for q=1:21 
+    
 for n=1:1000
-V_0=Vv(n)*sin(O);
-U_0=Vv(n)*cos(O);
-V=Vt.*((V_0-Vt*tan(g*t/Vt))./(Vt+V_0.*tan(g.*t./Vt)));
-x=(Vt^2/g).*log((Vt^2+g*U_0.*t)./Vt^2);
-y=(Vt^2/(2*g))*log((V_0.^2+Vt^2)./(V.^2+Vt^2));
-Vn(n,:)=V;
-X(n,:)=x;
-Y(n,:)=y;
+V_0=Vv(1,n,q).*sin(O(1,n,q));
+U_0=Vv(1,n,q).*cos(O(1,n,q));
+V(1,:,q)=Vt.*((V_0-Vt*tan(g*t/Vt))./(Vt+V_0.*tan(g.*t./Vt)));
+x(1,:,q)=(Vt^2/g).*log((Vt^2+g.*U_0.*t)./Vt^2);
+y(1,:,q)=(Vt^2/(2*g))*log((V_0.^2+Vt^2)./((V(1,:,q)).^2+Vt^2));
+Vn(n,:,q)=V(1,:,q);
+X(n,:,q)=x(1,:,q);
+Y(n,:,q)=y(1,:,q);
 
 for i=1:1000
-   if y(i)>=h
-    y_d(i)=y(i);
+   if y(:,i,q)>=h
+    y_d(:,i,q)=y(1,i,q);
    else 
-       y_d(i)=NaN;
+       y_d(:,i,q)=NaN;
    end
 end
-hold on
-plot(x,y_d)
-xlabel('Distance in X direction (m)')
-ylabel('Distance in Y direction (m)')
-title('Trajectory for Each Initial Velocity')
+
 end
 
 %How to Find Vinital necessary for given value of d
 
-F=zeros(1000);
-
+F=zeros(1000,1000,21);
+for q=1:21
 for i=1:1000 
     for n=1:1000
-if Y(i,n)>=h
-    F(i,n)=X(i,n);
+if Y(i,n,q)>=h
+    F(i,n,q)=X(i,n,q);
 else
-    F(i,n)=0;
-end 
-    end
+    F(i,n,q)=0;
+end
+    end 
+end
 end
 %Distance between the target and the apparatus
-d=max(F'); %#ok<UDIM>
-
+for q=1:21
+F2=permute(F,[2 1 3]);
+d(1,:,q)=max(F2(:,:,q)); 
+end
 %Energy needed
 
 C_eff=1; %Efficiency of the energy conservation
 
 Ep=(0.5*m*(Vv.^2))/C_eff;
-figure 
-plot(d,Ep)
-xlabel('Distance in X direction (m)')
-ylabel('Energy Required to be Stored in the Spring (J)')
-title('Energy vs Distance')
+
 
 %The minimum k of the Spring needed
 cmax=input('What is the maximum compression distance you want in metres');
-
+for q=1:21
 k_min=(((M*((Vmax^2)+g*cmax*2*sin(O)))/(cmax^2)))/C_eff;
 k_min_mm=k_min/1000;
 disp('The minimum k in N/mm is')
-disp(k_min_mm)
+disp(k_min_mm(1,1,q))
 disp('The minimum k in N/m is')
-disp(k_min)
-
+disp(k_min(1,1,q))
+end
 %How much the Spring should be compressed for a given d
 k=input('What is the k you want in N/m');
 
 if k_min<=k 
 Given_distance=input('What is the given distance');
 
-L=linspace(0,0,1000);
+L=zeros(1,1000,21);
+
 for i=1:1000 
-if d(i)>=Given_distance
-    L(i)=d(i);
+    if d(1,i)>=Given_distance
+    L(1,i,q)=d(1,i);
 else
-    L(i)=NaN;
+    L(1,i,q)=NaN;
 end 
 end
-Lmin=min(L);
-i=find(L==Lmin);
 
-a=k;
-b=-2*g*(sin(O))*(M);
-f=-(M)*((Vv(i))^2);
-e=sqrt((b^2)-(4*a*f));
-c=(-b+e)/(2*a);
-disp('The minimum compressed distance in centimetres is')
-disp(c*100)
-
-else
-    disp('The Spring Constant should be higher, this value cannot provide enough energy for the maximum compression value entered')
-end
+z

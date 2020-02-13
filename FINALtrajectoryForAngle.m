@@ -17,13 +17,14 @@ m_fsp=(4/pi^2)*0.1377;
 m_p=0.070;
 M=m_p+m_fsp+m;
 %Magnitude of Initial Velocity
-Vmax=7.67;
-Vmin=4.08;
+Vmax=8;
+Vmin=4;
 Vv=linspace(Vmin,Vmax,1000);
 
 %Angle
-O=35*(pi/180):1*(pi/180):55*(pi/180);%Make it pi/4 if you want to run it
 
+O=input('What is the angle you want for the trajectory');
+O=(O*(pi/180));
 %Matrixes
 Vn=zeros(1000,1000);
 x=linspace(0,0,1000);
@@ -70,7 +71,7 @@ else
 end 
     end
 end
-%Distance between the target and the apparatus
+%Distance between the target and the apparatus 
 d=max(F'); %#ok<UDIM>
 
 %Energy needed
