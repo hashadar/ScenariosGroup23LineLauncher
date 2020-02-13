@@ -17,13 +17,14 @@ m_fsp=(4/pi^2)*0.1377;
 m_p=0.070;
 M=m_p+m_fsp+m;
 %Magnitude of Initial Velocity
-Vmax=7.67;
-Vmin=4.08;
+Vmax=8;
+Vmin=4;
 Vv=linspace(Vmin,Vmax,1000);
 
 %Angle
-O=35*(pi/180):1*(pi/180):55*(pi/180);%Make it pi/4 if you want to run it
 
+O=input('What is the angle you want for the trajectory');
+O=(O*(pi/180));
 %Matrixes
 Vn=zeros(1000,1000);
 x=linspace(0,0,1000);
@@ -70,19 +71,10 @@ else
 end 
     end
 end
-%Distance between the target and the apparatus
+%Distance between the target and the apparatus 
 d=max(F'); %#ok<UDIM>
 
-%Energy needed
-
 C_eff=1; %Efficiency of the energy conservation
-
-Ep=(0.5*m*(Vv.^2))/C_eff;
-figure 
-plot(d,Ep)
-xlabel('Distance in X direction (m)')
-ylabel('Energy Required to be Stored in the Spring (J)')
-title('Energy vs Distance')
 
 %The minimum k of the Spring needed
 cmax=input('What is the maximum compression distance you want in metres');
@@ -122,3 +114,10 @@ disp(c*100)
 else
     disp('The Spring Constant should be higher, this value cannot provide enough energy for the maximum compression value entered')
 end
+
+%Energy needed to be stored in the Spring
+
+Ep=(((M*(0.5*(Vv(i)^2)+g*c*sin(O)))))/C_eff;
+
+%KE at release
+KE=(0.5*m*((Vv(i)^2)));
