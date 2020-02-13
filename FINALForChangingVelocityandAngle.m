@@ -97,6 +97,7 @@ end
 C_eff=1; %Efficiency of the energy conservation
 
 Ep=(0.5*m*(Vv(1).^2))/C_eff;
+KE=(0.5*m*(Vv(1).^2));
 
 k_min=445;
 

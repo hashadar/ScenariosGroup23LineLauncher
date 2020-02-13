@@ -115,9 +115,9 @@ else
     disp('The Spring Constant should be higher, this value cannot provide enough energy for the maximum compression value entered')
 end
 
-%Energy needed to be stored in the Spring
+%Energy needed
 
-Ep=(((M*(0.5*(Vv(i)^2)+g*c*sin(O)))))/C_eff;
+Ep=(((M*((Vv(i)^2)+g*c*2*sin(O)))))/C_eff;
 
 %KE at release
 KE=(0.5*m*((Vv(i)^2)));
