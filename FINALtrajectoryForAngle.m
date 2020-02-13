@@ -23,7 +23,7 @@ Vv=linspace(Vmin,Vmax,1000);
 
 %Angle
 
-O=input('What is the angle you want for the trajectory');
+O=input('What is the angle in degrees you want for the trajectory');
 O=(O*(pi/180));
 %Matrixes
 Vn=zeros(1000,1000);
@@ -108,7 +108,7 @@ b=-2*g*(sin(O))*(M);
 f=-(M)*((Vv(i))^2);
 e=sqrt((b^2)-(4*a*f));
 c=(-b+e)/(2*a);
-disp('The minimum compressed distance in centimetres is')
+disp('The minimum compressed distance in centimetres is in metres')
 disp(c*100)
 
 else

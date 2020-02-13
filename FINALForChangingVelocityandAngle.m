@@ -1,8 +1,10 @@
-
+clear
+clc
+close all
 
 %inputs
 k=input('What is the k you want in N/m');
-Given_distance=input('What is the given distance');
+Given_distance=input('What is the given distance in metres');
 
 %Constants
 g=9.81;
@@ -63,7 +65,7 @@ Vn(n,:,q)=V(1,:,q);
 X(n,:,q)=x(1,:,q);
 Y(n,:,q)=y(1,:,q);
 end
-
+end
 for q=1:21
 for i=1:1000
    if y(:,i,q)>=h
@@ -74,11 +76,11 @@ for i=1:1000
 end
 end
 
-end
 
 %How to Find Vinital necessary for given value of d
 
 F=zeros(1000,1000,21);
+d=zeros(1,1000,21);
 for q=1:21
 for i=1:1000 
     for n=1:1000
@@ -109,7 +111,7 @@ for i=1:1000
     L(1,i,q)=d(1,i,q);
 else
     L(1,i,q)=NaN;
-end 
+    end 
 end
 end
 
