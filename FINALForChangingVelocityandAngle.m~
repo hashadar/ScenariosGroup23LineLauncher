@@ -3,7 +3,7 @@ clc
 close all
 
 %inputs
-k=input('What is the k you want in N/m (Should be higher than 450)');
+k=input('What is the k you want in N/m');
 Given_distance=input('What is the given distance in metres');
 
 %Constants
@@ -77,6 +77,7 @@ end
 end
 
 
+%How to Find Vinital necessary for given value of d
 
 F=zeros(1000,1000,21);
 d=zeros(1,1000,21);
@@ -149,6 +150,6 @@ Ep(1,1,q)=(((M.*(0.5.*((Vv(1,s(q),q)).^2)+g.*c(1,1,q).*sin(O(1,1,q))))))./C_eff;
 
 %KE at release
 KE(1,1,q)=(0.5.*m.*(((Vv(1,s(q),q)).^2)));
-%Initial Velocity
+%Initial Velocit
 Vi(1,1,q)=(Vv(1,s(q),q));
 end

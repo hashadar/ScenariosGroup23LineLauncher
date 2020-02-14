@@ -58,7 +58,6 @@ title('Trajectory for Each Initial Velocity')
 ylim([-0.70,2.2]);
 end
 
-%How to Find Vinital necessary for given value of d
 
 F=zeros(1000);
 
