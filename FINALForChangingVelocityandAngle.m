@@ -143,11 +143,12 @@ disp(YEANAH);
 
 Ep=zeros(1,1,21);
 KE=zeros(1,1,21);
-
+Vi=zeros(1,1,21);
 for q=1:21
 %Energy needed to be stored in the Spring
 Ep(1,1,q)=(((M.*(0.5.*((Vv(1,s(q),q)).^2)+g.*c(1,1,q).*sin(O(1,1,q))))))./C_eff;
 
 %KE at release
 KE(1,1,q)=(0.5.*m.*(((Vv(1,s(q),q)).^2)));
+Vi(1,1,q)=(Vv(1,s(q),q));
 end

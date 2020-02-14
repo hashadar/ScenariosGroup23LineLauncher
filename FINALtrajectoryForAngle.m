@@ -121,3 +121,8 @@ Ep=(((M*(0.5*(Vv(i)^2)+g*c*sin(O)))))/C_eff;
 
 %KE at release
 KE=(0.5*m*((Vv(i)^2)));
+
+%Initial Velocity
+Vi=(Vv(i));
+
+
