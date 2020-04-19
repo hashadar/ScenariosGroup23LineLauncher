@@ -1,8 +1,10 @@
-
+clear
+clc
+close all
 
 %inputs
-k=input('What is the k you want in N/m');
-Given_distance=input('What is the given distance');
+k=input('What is the k you want in N/m (Should be higher than 450)');
+Given_distance=input('What is the given distance in metres');
 
 %Constants
 g=9.81;
@@ -11,7 +13,7 @@ A=pi*r^2;
 Cd=0.47;
 rho=1.225;
 m=0.025;
-h=-0.405;
+h=-0.580;
 Vt=sqrt((2*m*g)/(Cd*rho*A));
 t=linspace(0,1.5,1000);
 m_sp=0.1377;
@@ -22,7 +24,7 @@ C_eff=1; %Efficiency of the energy conservation
 
 %Magnitude of Initial Velocity
 Vmax=8;
-Vmin=4;
+Vmin=3.8;
 Vv=linspace(Vmin,Vmax,1000);
 for q=1:21
     Vv(:,:,q)=Vv(:,:,1);
@@ -52,7 +54,7 @@ y_d=zeros(1,1000,21);
 X=zeros(1000,1000,21);
 Y=zeros(1000,1000,21);
 for q=1:21 
-    
+ 
 for n=1:1000
 V_0=Vv(1,n,q).*sin(O(1,n,q));
 U_0=Vv(1,n,q).*cos(O(1,n,q));
@@ -63,7 +65,7 @@ Vn(n,:,q)=V(1,:,q);
 X(n,:,q)=x(1,:,q);
 Y(n,:,q)=y(1,:,q);
 end
-
+end
 for q=1:21
 for i=1:1000
    if y(:,i,q)>=h
@@ -74,11 +76,10 @@ for i=1:1000
 end
 end
 
-end
 
-%How to Find Vinital necessary for given value of d
 
 F=zeros(1000,1000,21);
+d=zeros(1,1000,21);
 for q=1:21
 for i=1:1000 
     for n=1:1000
@@ -109,7 +110,7 @@ for i=1:1000
     L(1,i,q)=d(1,i,q);
 else
     L(1,i,q)=NaN;
-end 
+    end 
 end
 end
 
@@ -141,11 +142,13 @@ disp(YEANAH);
 
 Ep=zeros(1,1,21);
 KE=zeros(1,1,21);
-
+Vi=zeros(1,1,21);
 for q=1:21
 %Energy needed to be stored in the Spring
 Ep(1,1,q)=(((M.*(0.5.*((Vv(1,s(q),q)).^2)+g.*c(1,1,q).*sin(O(1,1,q))))))./C_eff;
 
 %KE at release
 KE(1,1,q)=(0.5.*m.*(((Vv(1,s(q),q)).^2)));
+%Initial Velocity
+Vi(1,1,q)=(Vv(1,s(q),q));
 end

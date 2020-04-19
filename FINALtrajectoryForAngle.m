@@ -9,7 +9,7 @@ A=pi*r^2;
 Cd=0.47;
 rho=1.225;
 m=0.025;
-h=-0.405;
+h=-0.580;
 Vt=sqrt((2*m*g)/(Cd*rho*A));
 t=linspace(0,1.5,1000);
 m_sp=0.1377;
@@ -18,12 +18,12 @@ m_p=0.070;
 M=m_p+m_fsp+m;
 %Magnitude of Initial Velocity
 Vmax=8;
-Vmin=4;
+Vmin=3.8;
 Vv=linspace(Vmin,Vmax,1000);
 
 %Angle
 
-O=input('What is the angle you want for the trajectory');
+O=input('What is the angle in degrees you want for the trajectory');
 O=(O*(pi/180));
 %Matrixes
 Vn=zeros(1000,1000);
@@ -40,7 +40,6 @@ U_0=Vv(n)*cos(O);
 V=Vt.*((V_0-Vt*tan(g*t/Vt))./(Vt+V_0.*tan(g.*t./Vt)));
 x=(Vt^2/g).*log((Vt^2+g*U_0.*t)./Vt^2);
 y=(Vt^2/(2*g))*log((V_0.^2+Vt^2)./(V.^2+Vt^2));
-Vn(n,:)=V;
 X(n,:)=x;
 Y(n,:)=y;
 
@@ -56,9 +55,9 @@ plot(x,y_d)
 xlabel('Distance in X direction (m)')
 ylabel('Distance in Y direction (m)')
 title('Trajectory for Each Initial Velocity')
+ylim([-0.70,2.2]);
 end
 
-%How to Find Vinital necessary for given value of d
 
 F=zeros(1000);
 
@@ -108,7 +107,7 @@ b=-2*g*(sin(O))*(M);
 f=-(M)*((Vv(i))^2);
 e=sqrt((b^2)-(4*a*f));
 c=(-b+e)/(2*a);
-disp('The minimum compressed distance in centimetres is')
+disp('The minimum compressed distance in centimetres is in metres')
 disp(c*100)
 
 else
@@ -121,3 +120,8 @@ Ep=(((M*(0.5*(Vv(i)^2)+g*c*sin(O)))))/C_eff;
 
 %KE at release
 KE=(0.5*m*((Vv(i)^2)));
+
+%Initial Velocity
+Vi=(Vv(i));
+
+
